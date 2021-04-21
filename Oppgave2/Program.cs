@@ -73,7 +73,7 @@ namespace Oppgave2
                 if (oL.OrderId == Database.OrderTable.Where(x => x.CustomerId == (Database.CustomerTable.Where(z => z.Name == name).First().CustomerId)).First().OrderId)
                     OrderLineCopy.Add(oL);
 
-            // Adds the new orders to the OrderTable.
+            // Adds the new order to the OrderTable.
             Database.OrderTable.Add(new Order(Database.CustomerTable.Where(x => x.Name == name).First().CustomerId,
                 from, to));
 
@@ -85,35 +85,41 @@ namespace Oppgave2
 
         private static void PrintOrder(string name)
         {
+            // A new List to hold the OrderLines we want to print and know the total price of.
             List<OrderLine> OrderLineCopy = new List<OrderLine>();
 
             Console.WriteLine("Kunde: " + name);
 
+            // Find the correct orderlines by matching OrderIds and getting the OrderTable OrderId by matching CustomerIds by their Customer "Name"
+            // and then adds them to the OrderLineCopy list.
             foreach (OrderLine oL in Database.OrderLineTable)
                 if (oL.OrderId == Database.OrderTable.Where(x => x.CustomerId == (Database.CustomerTable.Where(z => z.Name == name).First().CustomerId)).First().OrderId)
                     OrderLineCopy.Add(oL);
 
+            // Prints out OrderId, ValidFrom and ValidTo
             foreach (Order oR in Database.OrderTable)
                 if (oR.OrderId == Database.OrderTable.Where(x => x.CustomerId == (Database.CustomerTable.Where(z => z.Name == name).First().CustomerId)).Last().OrderId)
                     Console.WriteLine("Ordre ID:" + $" { oR.OrderId } " + "\n" + "Valid from:" + $" {oR.ValidFrom.ToShortDateString() } " + "\n" + "To:" + $" {oR.ValidTo.ToShortDateString() } ");
 
-
+            // A new list to hold just the price of the OrderLines.
             List<int> TotalPrice = new List<int>();
 
+            // Loops through the ProductTable looking for matching productIds that are in the OrderLineCopy.
+            // Adds the price from the OrderLines to the TotalPrice list.
+            // Prints out the individual prices of the products.
             for (int i = 0; i < Database.ProductTable.Count();)
             {
                 foreach (OrderLine oL in OrderLineCopy)
                     if (Database.ProductTable[i].ProductId == oL.ProductId)
                         TotalPrice.Add(Database.ProductTable[i].Price);
-                /* foreach (OrderLine oL in OrderLineCopy)
+                foreach (OrderLine oL in OrderLineCopy)
                     if (Database.ProductTable[i].ProductId == oL.ProductId)
-                        Console.WriteLine("Price:" + $" {Database.ProductTable[i].Price} ");*/
+                        Console.WriteLine("Price:" + $" {Database.ProductTable[i].Price} ");
 
                 i++;
             }
 
-            foreach (int i in TotalPrice)
-                Console.WriteLine(("Price:" + $" {TotalPrice(x => Convert.ToInt32(x))} "));
+            // Prints out the total sum of the OrderLines
             Console.WriteLine("Total price:" + $" { TotalPrice.Sum(x => Convert.ToInt32(x)) } ");
             Console.WriteLine();
         }
