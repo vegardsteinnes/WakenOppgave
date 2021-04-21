@@ -1,0 +1,7 @@
+D:\Google Drive\Jobb\Waken\Oppgave2\bin\Debug\Oppgave2.exe.config
+D:\Google Drive\Jobb\Waken\Oppgave2\bin\Debug\Oppgave2.exe
+D:\Google Drive\Jobb\Waken\Oppgave2\bin\Debug\Oppgave2.pdb
+D:\Google Drive\Jobb\Waken\Oppgave2\obj\Debug\Oppgave2.csprojAssemblyReference.cache
+D:\Google Drive\Jobb\Waken\Oppgave2\obj\Debug\Oppgave2.csproj.CoreCompileInputs.cache
+D:\Google Drive\Jobb\Waken\Oppgave2\obj\Debug\Oppgave2.exe
+D:\Google Drive\Jobb\Waken\Oppgave2\obj\Debug\Oppgave2.pdb
